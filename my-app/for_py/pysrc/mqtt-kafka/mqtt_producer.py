@@ -32,7 +32,7 @@ def client_connect(user):
 def make_producer(user) :
     mqtt_client = client_connect(user)
     while True:
-        randNumber = randint(0, 360)
+        randNumber = randint(10, 110)
         now = datetime.now()
         timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
         # json으로 encode해서 publish

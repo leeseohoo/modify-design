@@ -1,23 +1,20 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import "./styles.css";
-import arrayData from "./arrayData";
-import WebSocket, {WebSocketServer} from "ws";
 
-let user1_hr = 0;
-let user1_rp = 0;
-let user1_tp = 0;
+let user4_hr = 0;
+let user4_rp = 0;
+let user4_tp = 0;
 const str = 'user4';
 
 const PADDING = 20;
-const MAX_VALUE = 360;
+const MAX_VALUE = 110;
 const Y_TICK = 4;
-const DURATION = 1000 * 30; // 30s
+const DURATION = 1000 * 20; // *30->2초에 한번, *10->1초에 한번
 const EX_TIME = "00:00";
 
 function LineChart1({ id }) {
-  
-  let post1 = user1_hr;
+  let post1 = user4_hr;
   const [data, setData] = useState([[Date.now(), post1]]);  
 
   useEffect(() => {
@@ -62,7 +59,7 @@ function LineChart1({ id }) {
         const value = yInterval * i;
         const YPoint =
           chartHeight - (value / MAX_VALUE) * (chartHeight - PADDING);
-        ctx.fillText(value, PADDING - 3, YPoint); // 간격 3px
+        ctx.fillText(value, PADDING-2, YPoint); // 간격 3px
       }
 
       // draw X axis
@@ -96,8 +93,10 @@ function LineChart1({ id }) {
 
         if (!index) {
           ctx.moveTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(255,0,0)'
         } else {
           ctx.lineTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(255,0,0)'
         }
       });
       ctx.stroke();
@@ -120,12 +119,12 @@ function LineChart1({ id }) {
   }, [data]);
 
   return (
-    <canvas id={id} width="600px" height="400px"></canvas>
+    <canvas id={id} width="420px" height="300px">Heart Rate</canvas>
   );
 }
 
 function LineChart2({ id }) {
-  let post2 = user1_rp;
+  let post2 = user4_rp;
   const [data, setData] = useState([[Date.now(), post2]]);  
 
   useEffect(() => {
@@ -170,13 +169,12 @@ function LineChart2({ id }) {
         const value = yInterval * i;
         const YPoint =
           chartHeight - (value / MAX_VALUE) * (chartHeight - PADDING);
-        ctx.fillText(value, PADDING - 3, YPoint); // 간격 3px
+        ctx.fillText(value, PADDING-2, YPoint); // 간격 3px
       }
 
       // draw X axis
       ctx.lineTo(chartWidth, chartHeight);
       ctx.stroke();
-
       ctx.save();
       ctx.beginPath();
       ctx.rect(PADDING, 0, chartWidth, canvasHeight);
@@ -204,8 +202,10 @@ function LineChart2({ id }) {
 
         if (!index) {
           ctx.moveTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(0,128,0)'
         } else {
           ctx.lineTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(0,128,0)'
         }
       });
       ctx.stroke();
@@ -228,12 +228,12 @@ function LineChart2({ id }) {
   }, [data]);
 
   return (
-    <canvas id={id} width="600px" height="400px"></canvas>
+    <canvas id={id} width="420px" height="300px"></canvas>
   );
 }
 
 function LineChart3({ id }) {
-  let post3 = user1_tp;
+  let post3 = user4_tp;
   const [data, setData] = useState([[Date.now(), post3]]);  
 
   useEffect(() => {
@@ -278,7 +278,7 @@ function LineChart3({ id }) {
         const value = yInterval * i;
         const YPoint =
           chartHeight - (value / MAX_VALUE) * (chartHeight - PADDING);
-        ctx.fillText(value, PADDING - 3, YPoint); // 간격 3px
+        ctx.fillText(value, PADDING-2, YPoint); // 간격 3px
       }
 
       // draw X axis
@@ -312,8 +312,10 @@ function LineChart3({ id }) {
 
         if (!index) {
           ctx.moveTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(0,0,255)'
         } else {
           ctx.lineTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(0,0,255)'
         }
       });
       ctx.stroke();
@@ -336,49 +338,12 @@ function LineChart3({ id }) {
   }, [data]);
 
   return (
-    <canvas id={id} width="600px" height="400px"></canvas>
+    <canvas id={id} width="420px" height="300px"></canvas>
   );
 }
 
 // 심박수 : 60 ~ 100 beats
 // 호흡수 : 1분에 12 ~ 20회
-function Getdata() {
-  // console.log("arrayData: ", typeof arrayData);
-  // console.log(arrayData);
-  // console.log("objectData: ", typeof objectData);
-  // console.log(objectData);
-  
-  const newArrayData = arrayData.map((item, index) => {
-
-    return (
-      <li key={index}>
-        {item.type} : {item.measure}{item.unit} per {item.time}
-      </li>
-    );
-  });
-  // return (
-  //   <li key={index}>
-  //     View Vital Signs
-  //     {item.user}'s Vital Signs
-  //     Heart Rate : {item.heartrate} beats/1m
-  //     Respiration Rate : {item.resp} times/1m
-  //     Body Temperature : {item.temp} 
-  //   </li>
-  // );
-
-  // console.log(user['user'], user['timestamp'], user['heartrate'], user['resp'], user['temp']);
-
-  return (
-    <div className="Getdata">
-      <ul className="container">{newArrayData}</ul>
-      {/* <h1>{objectData.welcomeMessage}</h1>
-      <h2>you connected to {objectData.localAddress}</h2>
-      {objectData.isDevEnv ? (
-        <span>data from arrayData.json</span>
-      ) : null} */}
-    </div>
-  );
-}
 
 const Detail = () => {
 
@@ -393,20 +358,31 @@ const Detail = () => {
       
       let parse_data = JSON.parse(event.data)
       let ur = parse_data.user
+      // let gx = parse_data.g_x
+      // let gy = parse_data.g_y
+      // let gz = parse_data.g_z
+
       let hr = parse_data.heartrate
       let rp = parse_data.resp
       let tp = parse_data.temp
+
+      // let hr = parse_data.g_x
+      // let rp = parse_data.g_y
+      // let tp = parse_data.g_z
+      console.log('hr: '+hr)
+      console.log('rp: '+rp)
+      console.log('tp: '+tp)
       
-      if (ur===str){
-        console.log('ur: '+ur)
-        console.log('hr: '+hr)
-        console.log('rp: '+rp)
-        console.log('tp: '+tp)
-        user1_hr=hr;
-        user1_rp=rp;
-        user1_tp=tp;
-        // console.log(message + "수신");
-      }
+      // if (ur===str){
+      //   console.log('ur: '+ur)
+      //   console.log('hr: '+hr)
+      //   console.log('rp: '+rp)
+      //   console.log('tp: '+tp)
+        user4_hr=hr;
+        user4_rp=rp;
+        user4_tp=tp;
+      //   // console.log(message + "수신");
+      // }
     };
 
     return () => {
@@ -426,16 +402,21 @@ const Detail = () => {
   //   };
   // }, []);
   
+
   return (
     <div className="detail">
       <p>{message}</p>
-      <p className="signal">Heart Rate</p>
-      {<LineChart1 className="chart" id="HR_lineChart" />}
-      <p className="signal">Respiration Rate</p>
-      {<LineChart2 className="chart" id="RR_lineChart" />}
-      <p className="signal">Body Temperature</p>
-      {<LineChart3 className="chart" id="BT_lineChart" />}
-      {/* {<Getdata className="json" id="data" />}  */}
+      <div id="parent">
+        <div id="title1"><p id="title11">Heart Rate</p><br/>
+        {<LineChart1 className="chart" id="HR_lineChart" />}
+        </div>
+        <div id="title2"><p id="title12">Respiration Rate</p><br/>
+        {<LineChart2 className="chart" id="RR_lineChart" />}
+        </div>
+        <div id="title3"><p id="title13">Body Temperature</p><br/>
+        {<LineChart3 className="chart" id="BT_lineChart" />}
+        </div>
+      </div>
     </div>
   );
 }

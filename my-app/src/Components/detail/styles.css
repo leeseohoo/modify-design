@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
 .detail {
   font-family: sans-serif;
   text-align: center;
@@ -14,4 +16,58 @@
 }
 .chart {
   align-items: center;
+}
+
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+#chart {
+  max-width: 650px;
+  margin: 35px auto;
+}
+
+#parent {
+  width: 100%;
+  margin: 10px auto;
+  overflow-x:hidden; 
+  overflow-y:auto;
+}
+
+#title11 {
+  padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; color: #232323; background: #fff8e8; border-left: solid 10px #ffc06e;
+  /* border: 1px solid red; */
+  /* border-radius: 10px 10px; */
+  width:60%;
+}
+#title12 {
+  padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; color: #232323; background: #eefdee; border-left: solid 10px #0f870b;
+  width:60%;
+}
+#title13 {
+  padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; color: #232323; background: #E4FCFF; border-left: solid 10px #1DC1D6;
+  width:60%;
+}
+
+#title1 {
+  float: left;
+  margin-left: 2%;
+  width:30%;
+  box-sizing: border-box;
+}
+
+#title2 {
+  float: left;
+  margin-left: 2%;
+  width:30%;
+  box-sizing: border-box;
+}
+
+#title3 {
+  float: left;
+  margin-left: 2%;
+  margin-right: 3%;
+  width:30%;
+  box-sizing: border-box;
 }

@@ -60,17 +60,18 @@ class MessageConsumer:
                 m_in = m_decode[:len(m_decode)]
 
                 m_json = json.loads(m_in)
-                timestamp = m_json["timestamp"]
-                g_x = str(m_json["g_x"])
-                g_y = str(m_json["g_y"])
-                g_z = str(m_json["g_z"])
-                a_x = str(m_json["a_x"])
-                a_y = str(m_json["a_y"])
-                a_z = str(m_json["a_z"])
+                print(m_json)
+                timestamp = str(m_json['timestamp'])
+                #g_x = str(m_json["g_x"])
+                #g_y = str(m_json["g_y"])
+                #g_z = str(m_json["g_z"])
+                #a_x = str(m_json["a_x"])
+                #a_y = str(m_json["a_y"])
+                #a_z = str(m_json["a_z"])
                 heartrate = str(m_json["heartrate"])
                 resp = str(m_json["resp"])
                 temp = str(m_json["temp"])
-                
+                '''
                 sql = 'INSERT INTO ' + self.topic + ' (timestamp, g_x, g_y, g_z, a_x, a_y, a_z, heartrate, resp, temp) VALUES (\''+timestamp+'\', '+g_x+', '+g_y+' ,'+g_z+' ,'+a_x+' ,'+a_y+', '+a_z+', '+heartrate+', '+resp+' ,'+temp+');'
                 
                 if self.cur.execute(sql):
@@ -84,7 +85,7 @@ class MessageConsumer:
                 
                 # add data to bufffer
                 self.buff.set_data(m_json)
-                
+                '''
                 asyncio.get_event_loop().run_until_complete(self.client.send(json.dumps(m_json))) # 비동기적 Socket Client 실행
                 # asyncio.run(self.client2.main(json.dumps(m_json))) # Socket Server - Error❌
                 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./styles.css";
 import arrayData from "./arrayData";
 import WebSocket, {WebSocketServer} from "ws";
+import ApexChart from 'apexcharts'
 
 let user1_hr = 0;
 let user1_rp = 0;
@@ -10,13 +11,12 @@ let user1_tp = 0;
 const str = 'user1';
 
 const PADDING = 20;
-const MAX_VALUE = 360;
+const MAX_VALUE = 110;
 const Y_TICK = 4;
-const DURATION = 1000 * 30; // 30s
+const DURATION = 1000 * 20; // *30->2초에 한번, *10->1초에 한번
 const EX_TIME = "00:00";
 
 function LineChart1({ id }) {
-  
   let post1 = user1_hr;
   const [data, setData] = useState([[Date.now(), post1]]);  
 
@@ -62,7 +62,7 @@ function LineChart1({ id }) {
         const value = yInterval * i;
         const YPoint =
           chartHeight - (value / MAX_VALUE) * (chartHeight - PADDING);
-        ctx.fillText(value, PADDING - 3, YPoint); // 간격 3px
+        ctx.fillText(value, PADDING-2, YPoint); // 간격 3px
       }
 
       // draw X axis
@@ -96,8 +96,10 @@ function LineChart1({ id }) {
 
         if (!index) {
           ctx.moveTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(255,0,0)'
         } else {
           ctx.lineTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(255,0,0)'
         }
       });
       ctx.stroke();
@@ -120,7 +122,7 @@ function LineChart1({ id }) {
   }, [data]);
 
   return (
-    <canvas id={id} width="600px" height="400px"></canvas>
+    <canvas id={id} width="420px" height="300px">Heart Rate</canvas>
   );
 }
 
@@ -170,13 +172,12 @@ function LineChart2({ id }) {
         const value = yInterval * i;
         const YPoint =
           chartHeight - (value / MAX_VALUE) * (chartHeight - PADDING);
-        ctx.fillText(value, PADDING - 3, YPoint); // 간격 3px
+        ctx.fillText(value, PADDING-2, YPoint); // 간격 3px
       }
 
       // draw X axis
       ctx.lineTo(chartWidth, chartHeight);
       ctx.stroke();
-
       ctx.save();
       ctx.beginPath();
       ctx.rect(PADDING, 0, chartWidth, canvasHeight);
@@ -204,8 +205,10 @@ function LineChart2({ id }) {
 
         if (!index) {
           ctx.moveTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(0,128,0)'
         } else {
           ctx.lineTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(0,128,0)'
         }
       });
       ctx.stroke();
@@ -228,7 +231,7 @@ function LineChart2({ id }) {
   }, [data]);
 
   return (
-    <canvas id={id} width="600px" height="400px"></canvas>
+    <canvas id={id} width="420px" height="300px"></canvas>
   );
 }
 
@@ -278,7 +281,7 @@ function LineChart3({ id }) {
         const value = yInterval * i;
         const YPoint =
           chartHeight - (value / MAX_VALUE) * (chartHeight - PADDING);
-        ctx.fillText(value, PADDING - 3, YPoint); // 간격 3px
+        ctx.fillText(value, PADDING-2, YPoint); // 간격 3px
       }
 
       // draw X axis
@@ -312,8 +315,10 @@ function LineChart3({ id }) {
 
         if (!index) {
           ctx.moveTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(0,0,255)'
         } else {
           ctx.lineTo(xPoint, yPoint);
+          ctx.strokeStyle='rgb(0,0,255)'
         }
       });
       ctx.stroke();
@@ -336,47 +341,105 @@ function LineChart3({ id }) {
   }, [data]);
 
   return (
-    <canvas id={id} width="600px" height="400px"></canvas>
+    <canvas id={id} width="420px" height="300px"></canvas>
   );
 }
 
 // 심박수 : 60 ~ 100 beats
 // 호흡수 : 1분에 12 ~ 20회
-function Getdata() {
-  // console.log("arrayData: ", typeof arrayData);
-  // console.log(arrayData);
-  // console.log("objectData: ", typeof objectData);
-  // console.log(objectData);
-  
-  const newArrayData = arrayData.map((item, index) => {
+function Getdata1() {  
+  var options = {
+    series: [{
+      name: "Respiration Rate",
+      data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+    },
+    {
+      name: "Body Temperature",
+      data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
+    },
+    {
+      name: 'Heart Rate',
+      data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+    }
+  ],
+    chart: {
+    height: 400,
+    type: 'line',
+    zoom: {
+      enabled: false
+    },
+  },
+  dataLabels: {
+    enabled: false
+  },
+  stroke: {
+    width: [5, 7, 5],
+    curve: 'straight',
+    dashArray: [0, 8, 5]
+  },
+  title: {
+    text: 'Vital Signal',
+    align: 'left'
+  },
+  legend: {
+    tooltipHoverFormatter: function(val, opts) {
+      return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+    }
+  },
+  markers: {
+    size: 0,
+    hover: {
+      sizeOffset: 6
+    }
+  },
+  xaxis: {
+    categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
+      '10 Jan', '11 Jan', '12 Jan'
+    ],
+  },
+  tooltip: {
+    y: [
+      {
+        title: {
+          formatter: function (val) {
+            return val + " (mins)"
+          }
+        }
+      },
+      {
+        title: {
+          formatter: function (val) {
+            return val + " per session"
+          }
+        }
+      },
+      {
+        title: {
+          formatter: function (val) {
+            return val;
+          }
+        }
+      }
+    ]
+  },
+  grid: {
+    borderColor: '#f1f1f1',
+  }
+  };
 
-    return (
-      <li key={index}>
-        {item.type} : {item.measure}{item.unit} per {item.time}
-      </li>
-    );
-  });
-  // return (
-  //   <li key={index}>
-  //     View Vital Signs
-  //     {item.user}'s Vital Signs
-  //     Heart Rate : {item.heartrate} beats/1m
-  //     Respiration Rate : {item.resp} times/1m
-  //     Body Temperature : {item.temp} 
-  //   </li>
-  // );
+  var chart = new ApexChart(document.querySelector("#chart"), options);
+  chart.render();
 
-  // console.log(user['user'], user['timestamp'], user['heartrate'], user['resp'], user['temp']);
 
   return (
-    <div className="Getdata">
-      <ul className="container">{newArrayData}</ul>
-      {/* <h1>{objectData.welcomeMessage}</h1>
-      <h2>you connected to {objectData.localAddress}</h2>
-      {objectData.isDevEnv ? (
-        <span>data from arrayData.json</span>
-      ) : null} */}
-    </div>
+    <div id="chart"></div>
+  );
+}
+
+function Getdata2() {
+
+  return (
+    <div id="chart2"></div>
   );
 }
 
@@ -426,16 +489,27 @@ const Detail = () => {
   //   };
   // }, []);
   
+
   return (
     <div className="detail">
+      {/* {<Getdata1 id="apexchart" />}  */}
+      {/* <ApexChart/> */}
+
       <p>{message}</p>
-      <p className="signal">Heart Rate</p>
-      {<LineChart1 className="chart" id="HR_lineChart" />}
+      <div id="parent">
+        <div id="title1"><p id="title11">Heart Rate</p><br/>
+        {<LineChart1 className="chart" id="HR_lineChart" />}
+        </div>
+        <div id="title2"><p id="title12">Respiration Rate</p><br/>
+        {<LineChart2 className="chart" id="RR_lineChart" />}
+        </div>
+        <div id="title3"><p id="title13">Body Temperature</p><br/>
+        {<LineChart3 className="chart" id="BT_lineChart" />}
+        </div>
+      </div>
+      {/* <p className="signal">Heart Rate</p>
       <p className="signal">Respiration Rate</p>
-      {<LineChart2 className="chart" id="RR_lineChart" />}
-      <p className="signal">Body Temperature</p>
-      {<LineChart3 className="chart" id="BT_lineChart" />}
-      {/* {<Getdata className="json" id="data" />}  */}
+      <p className="signal">Body Temperature</p> */}
     </div>
   );
 }
