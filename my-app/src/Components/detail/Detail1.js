@@ -8,7 +8,7 @@ import ApexChart from 'apexcharts'
 let user1_hr = 0;
 let user1_rp = 0;
 let user1_tp = 0;
-const str = 'user1';
+const str = 'one';
 
 const PADDING = 20;
 const MAX_VALUE = 110;
@@ -454,13 +454,33 @@ const Detail = () => {
     socket.onmessage = (event) => {
       setMessage(event.data);
       
-      let parse_data = JSON.parse(event.data)
-      let ur = parse_data.user
-      let hr = parse_data.heartrate
-      let rp = parse_data.resp
-      let tp = parse_data.temp
+      // let parse_data = JSON.parse(event.data)
+      // let ur = parse_data.user
+      // let hr = parse_data.heartrate
+      // let rp = parse_data.resp
+      // let tp = parse_data.temp
+
+
+      const arr1 = event.data.split(",")
+
+
+      let timestamp = arr1[0]
+      let batteryLv = arr1[2]
+      let hr = arr1[3]
+      let rp = arr1[5]
+      let tp = arr1[4]
+      let ur = arr1[9]
+
+      let t = 0
+      bar.style.width = 0
+      const barAnimation = setInterval(() => {
+        bar.style.width =  t + '%'
+        t++ >= batteryLv && clearInterval(barAnimation)
+      }, 1000)
       
-      if (ur===str){
+      // if (ur===str){
+        console.log('timestamp: '+timestamp)
+        console.log('batteryLv: '+batteryLv)
         console.log('ur: '+ur)
         console.log('hr: '+hr)
         console.log('rp: '+rp)
@@ -469,7 +489,7 @@ const Detail = () => {
         user1_rp=rp;
         user1_tp=tp;
         // console.log(message + "수신");
-      }
+      // }
     };
 
     return () => {

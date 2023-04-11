@@ -14,60 +14,66 @@
   text-align: center;
   height: 100vh;
 }
-.chart {
+/* .chart {
   align-items: center;
-}
+} */
 
 
 body {
   font-family: Roboto, sans-serif;
 }
 
-#chart {
+/* #chart {
   max-width: 650px;
   margin: 35px auto;
-}
+} */
 
 #parent {
   width: 100%;
   margin: 10px auto;
-  overflow-x:hidden; 
-  overflow-y:auto;
+  /* overflow-x:hidden; 
+  overflow-y:auto; */
+  display: flex;
 }
 
 #title11 {
   padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; color: #232323; background: #fff8e8; border-left: solid 10px #ffc06e;
   /* border: 1px solid red; */
-  /* border-radius: 10px 10px; */
-  width:60%;
+  border-radius: 10px 10px 10px 10px;
+  /* width:60%; */
+  overflow: hidden;
 }
 #title12 {
   padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; color: #232323; background: #eefdee; border-left: solid 10px #0f870b;
-  width:60%;
+  border-radius: 10px 10px 10px 10px;
+  /* width:60%; */
+  overflow: hidden;
 }
 #title13 {
   padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; color: #232323; background: #E4FCFF; border-left: solid 10px #1DC1D6;
-  width:60%;
+  border-radius: 10px 10px 10px 10px;
+  /* width:60%; */
+  overflow: hidden;
 }
 
 #title1 {
-  float: left;
-  margin-left: 2%;
+  margin-left: 3%;
   width:30%;
-  box-sizing: border-box;
+  flex:1;
+  overflow: hidden;
 }
 
 #title2 {
-  float: left;
   margin-left: 2%;
   width:30%;
-  box-sizing: border-box;
+  flex:1;
+  overflow: hidden;
 }
 
 #title3 {
-  float: left;
   margin-left: 2%;
   margin-right: 3%;
   width:30%;
-  box-sizing: border-box;
+  overflow: hidden;
+  flex:1;
 }

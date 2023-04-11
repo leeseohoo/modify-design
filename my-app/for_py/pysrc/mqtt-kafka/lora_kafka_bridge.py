@@ -44,23 +44,22 @@ count = 10
 
 def receive_data(serial_port):
     now = datetime.now()
-    timestamp = now.strftime('%Y-%m-%D %H:%M:%S')
+    timestamp = now.strftime('%Y-%m-%d %H:%M:%S')
 
     if serial_port.readable():
         data = serial_port.readline().decode('utf-8')
         print(data)
         if len(data)>3:
-            jsondata = json.loads(data)
         
+            strings = data.split(",")
+            topic = strings[9]
         
-            topic = jsondata['user']
-        
-            print("receive data: ", timestamp, " / ", jsondata)
+            print("receive data: ", timestamp, " / ", data)
             kafka_producer = KafkaProducer(bootstrap_servers='localhost:9092',
-                                   value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+                                   value_serializer=lambda v: v.encode('utf-8'))
 
-            if kafka_producer.send(topic, jsondata):
-                print('LoRa in KAFKA out - ' + str(json.dumps(jsondata).encode('utf-8')) + ' to ' + topic)
+            if kafka_producer.send(topic, data):
+                print('LoRa in KAFKA out - ' + str(data.encode('utf-8')) + ' to ' + topic)
 
 
     return
@@ -71,15 +70,14 @@ while True:
     time.sleep(0.1)
 
 def on_message(client, userdata, message):
-    m_decode = str(message.payload.decode("utf-8", "ignore"))
-    m_in = json.loads(m_decode)
-    topic = m_in["user"]
+    m_in = str(message.payload.decode("utf-8", "ignore"))
+    strings = data.split(",")
+    topic = strings[9]
 
 
 
 
-
-user_list = ["user1", "user2", "user3", "user4", "user5", "user6", "user7", "user8", "user9", "user10"]
+user_list = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
 
 
 if __name__ == '__main__':

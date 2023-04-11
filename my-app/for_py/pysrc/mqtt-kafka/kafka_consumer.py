@@ -1,4 +1,4 @@
-import json
+
 import multiprocessing
 import asyncio
 import pymysql
@@ -17,7 +17,7 @@ from SocketClient import SocketClient as SocketClient
 
 """user# 토픽에서 데이터 받아 db에 저장"""
 
-class MessageConsumer:
+class MessageConsumer():
     topic =""
     def __init__(self, topic):
         self.topic = topic
@@ -27,7 +27,6 @@ class MessageConsumer:
         self.buff = bf(self.topic)
         # DB연결
         self.client = SocketClient(self.topic) # Socket Client
-        # self.client2 = SocketClient2(self.topic) # Socket Server - Error❌
         self.conn = pymysql.connect(host='127.0.0.1', user='root', password='12341234', db='motionDB', charset='utf8')
         self.cur = self.conn.cursor()
         sql = 'DROP TABLE IF EXISTS ' + self.topic
@@ -35,9 +34,9 @@ class MessageConsumer:
 
         print(self.topic + " table created")
         sql = 'CREATE TABLE ' + self.topic + ' (timestamp datetime PRIMARY KEY, ' \
-                                             'g_x int(3), g_y int(3), g_z int(3), ' \
-                                             'a_x int(3), a_y int(3), a_z int(3),' \
-                                             'heartrate int(3), resp int(3), temp int(3))'
+                                             'devid int(3),' \
+                                             'data text)'
+                                             
         self.cur.execute(sql)
         self.conn.commit()
 
@@ -59,18 +58,27 @@ class MessageConsumer:
                 m_decode = str(message.value.decode("utf-8", "ignore"))
                 m_in = m_decode[:len(m_decode)]
 
-                m_json = json.loads(m_in)
-                print(m_json)
-                timestamp = str(m_json['timestamp'])
+                strings = m_in.split(",")
+                timestamp = strings[0]
+                did = strings[1]
+                # timestamp = str(m_json['timestamp'])
                 #g_x = str(m_json["g_x"])
                 #g_y = str(m_json["g_y"])
                 #g_z = str(m_json["g_z"])
                 #a_x = str(m_json["a_x"])
                 #a_y = str(m_json["a_y"])
                 #a_z = str(m_json["a_z"])
-                heartrate = str(m_json["heartrate"])
-                resp = str(m_json["resp"])
-                temp = str(m_json["temp"])
+                # heartrate = str(m_json["heartrate"])
+                # temp = str(m_json["temp"])
+                # resp = str(m_json["resp"])
+                batteryLv = strings[2]
+                heartrate = strings[3]
+                temp = strings[4]
+                resp = strings[5]
+                motion = strings[7]
+                uid = strings[8]
+                username = strings[9]
+    
                 '''
                 sql = 'INSERT INTO ' + self.topic + ' (timestamp, g_x, g_y, g_z, a_x, a_y, a_z, heartrate, resp, temp) VALUES (\''+timestamp+'\', '+g_x+', '+g_y+' ,'+g_z+' ,'+a_x+' ,'+a_y+', '+a_z+', '+heartrate+', '+resp+' ,'+temp+');'
                 
@@ -86,7 +94,7 @@ class MessageConsumer:
                 # add data to bufffer
                 self.buff.set_data(m_json)
                 '''
-                asyncio.get_event_loop().run_until_complete(self.client.send(json.dumps(m_json))) # 비동기적 Socket Client 실행
+                asyncio.get_event_loop().run_until_complete(self.client.send(m_in)) # 비동기적 Socket Client 실행
                 # asyncio.run(self.client2.main(json.dumps(m_json))) # Socket Server - Error❌
                 
                 # make json
@@ -104,7 +112,7 @@ class MessageConsumer:
             consumer.close()
 
 if __name__ == '__main__':
-    user_list = ["user1", "user2", "user3", "user4", "user5", "user6", "user7", "user8", "user9", "user10"]
+    user_list = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
     
     pool = multiprocessing.Pool(processes=10)
     pool.map(MessageConsumer, user_list)
