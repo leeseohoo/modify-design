@@ -35,23 +35,25 @@ body {
   overflow-y:auto; */
   display: flex;
 }
-
+.top {
+  display: inline-block;
+}
 #title11 {
   padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; color: #232323; background: #fff8e8; border-left: solid 10px #ffc06e;
   /* border: 1px solid red; */
-  border-radius: 10px 10px 10px 10px;
+  /* border-radius: 10px 10px 10px 10px; */
   /* width:60%; */
   overflow: hidden;
 }
 #title12 {
   padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; color: #232323; background: #eefdee; border-left: solid 10px #0f870b;
-  border-radius: 10px 10px 10px 10px;
+  /* border-radius: 10px 10px 10px 10px; */
   /* width:60%; */
   overflow: hidden;
 }
 #title13 {
   padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; color: #232323; background: #E4FCFF; border-left: solid 10px #1DC1D6;
-  border-radius: 10px 10px 10px 10px;
+  /* border-radius: 10px 10px 10px 10px; */
   /* width:60%; */
   overflow: hidden;
 }
@@ -61,6 +63,8 @@ body {
   width:30%;
   flex:1;
   overflow: hidden;
+  border: 2px solid #f1f1f1;
+  border-radius: 30px
 }
 
 #title2 {
@@ -68,6 +72,8 @@ body {
   width:30%;
   flex:1;
   overflow: hidden;
+  border: 2px solid #f1f1f1;
+  border-radius: 30px
 }
 
 #title3 {
@@ -76,4 +82,6 @@ body {
   width:30%;
   overflow: hidden;
   flex:1;
+  border: 2px solid #f1f1f1;
+  border-radius: 30px
 }

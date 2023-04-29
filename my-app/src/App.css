@@ -54,9 +54,8 @@ body {
 
 .name {
     font-size: 60px;
-    font-weight: 900;
+    font-weight: 800;
     font-family: 'Oswald', sans-serif;
-    text-align: center;
 }
 .main {
     display: block; margin: 0px auto;
@@ -64,13 +63,13 @@ body {
 .contacts {
     font-size: 15px;
     opacity: 0.7;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Oswald', sans-serif;
     font-style: italic;
 }
 .link {
     font-size: 10px;
     opacity: 0.7;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Oswald', sans-serif;
     text-align: center;
 }
 .thumb {
@@ -101,14 +100,47 @@ body {
 
 .experience img {
     margin-right: 7px;
-    margin-top:10px;
+    border-image-outset: 10px;
+    align-items: center;
+    /* width: 150px;
+    height: 150px; */
+    transition: all 0.3s ease-in-out;
+}
+.experience{
+    font-size: 60px;
+    font-weight: 700;
+    font-family: 'Oswald', sans-serif;
+    position: absolute;
+    margin-left: 100px;
+    margin-top: 16px;
+}
+.row1, .row2, .row3
+{
+   display: inline-block;
+   padding-left: 90px;
+}
+.square {
     border: 5px;
     border-style: solid;
     border-color: lightgray;
-    border-image-outset: 10px;
     width: 150px;
-    height: 150px;
-    transition: all 0.3s ease-in-out;
+    height: 155px;
+    border-radius: 40px 40px;
+    background-color: gainsboro;
+    margin-bottom: 20px;
+}
+.square:hover {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1); /* 크롬 */
+    -moz-transform: scale(1.1); /* 파이어폭스 */
+    -o-transform: scale(1.1); /* 오페라 */
+    z-index: 1;
+    align-items: center;
+    border: 2px solid #545455;
+    border-radius: 40px 40px;
+}
+.photo img {
+    width: 10px;
 }
 /* 커서 올릴 시 이미지 크게 */
 .photo:hover {
@@ -127,19 +159,12 @@ body {
     z-index: 1;
     align-items: center;
 }
-.experience p{
-    font-size: 60px;
-    font-weight: 700;
-    font-family: 'Oswald', sans-serif;
-}
+
 /* for layout */
-.contents1 {
-    width: 1000px;
-    margin-left: 50px;
-    /* 800 width에 margin-left: 120px; */
-    text-align: left;
-}
+
 #data {
+    display: inline-block;
+    margin-left: 10px;
     font-size: 23px;
     text-align: left;
     font-weight: bold;
@@ -147,12 +172,14 @@ body {
     width: 150px;
     color: #2B3856;
 }
+
 #pw {
     font-size: 18px;
-    text-align: left;
+    text-align: right;
     font-family: 'Oswald', sans-serif;
     width: 150px;
     color: #545455;
+    margin-right: 10px;
 }
 #view {
     font-size: 18px;
@@ -161,18 +188,7 @@ body {
     font-family: 'Oswald', sans-serif;
     width: 150px;
 }
-.contents2 {
-    width: 1000px;
-    margin-left: 50px;
-    margin-top: 12px;
-    text-align: left;
-}
-.contents3 {
-    width: 1000px;
-    margin-left: 50px;
-    margin-top: 12px;
-    text-align: left;
-}
+
 /* 프로젝트 기간 */
 .year {
     font-family: 'Oswald', sans-serif;
@@ -205,6 +221,7 @@ body {
 .interests .comment {
     font-size: 16px;
     font-style: italic;
+    font-family: 'Oswald', sans-serif;
 }
 
 a{
@@ -222,6 +239,7 @@ a{
 .foot { font-size: 16px; font-family: 'Oswald', sans-serif; color: #2B3856; font-weight: bold; text-align: center;}
 .back { 
     text-align: right;
+    margin-right: 20px;
     font-size: 17px;
     font-family: 'Noto Sans KR', sans-serif;
     opacity: 0.8;

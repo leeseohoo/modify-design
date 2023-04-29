@@ -20,30 +20,30 @@ const Nav = () => {
         <nav className = "menu-bar">
             <div className = "index">
                 <div className = "img">
-                    <img className="porfile-img" src ={logo} alt="profile"/>
+                    <a className="top" href="http://localhost:3000/">
+                        <img className="porfile-img" src ={logo} alt="profile"/>
+                    </a>
                 </div>
                 <br/>
-                <a href="#target1"><h3 className="click" onClick={onClickSection1}>ABOUT</h3></a>
+                {/* <Link to={"/section2"}>
+                    <h3 className="click" onClick={onClickSection2}>MEMBER</h3>
+                </Link> */}
+                <Link to={"/section1"}>
+                    <h3 className="click" onClick={onClickSection1}>SUBJECT</h3>
+                </Link>
+                <Link to={"/section4"}>
+                    <h3 className="click" onClick={onClickSection4}>INFORMATION</h3>
+                </Link>
+                <Link to={"/section3"}>
+                    <h3 className="click" onClick={onClickSection3}>CONTACT</h3>
+                </Link>
+                {/* <a href="#target1"><h3 className="click" onClick={onClickSection1}>ABOUT</h3></a>
                 <a href="#target2"><h3 className="click" onClick={onClickSection2}>MEMBER</h3></a>
                 <a href="#target3"><h3 className="click" onClick={onClickSection3}>CONTACT</h3></a>
-                <a href="#target4"><h3 className="click" onClick={onClickSection4}>INFORMATION</h3></a>
+                <a href="#target4"><h3 className="click" onClick={onClickSection4}>INFORMATION</h3></a> */}
             </div>
         </nav>
     )
 }
-
-// const ScrollDemo = () => {
-//     const myRef = useRef(null)
- 
-//     const executeScroll = () => myRef.current.scrollIntoView()
-//     // run this function from an event handler or an effect to execute scroll 
- 
-//     return (
-//        <> 
-//           <div ref={myRef}>Element to scroll to</div> 
-//           <button onClick={executeScroll}> Click to scroll </button> 
-//        </>
-//     )
-//  }
 
 export default Nav

@@ -5,33 +5,16 @@ import Section2 from "./section2/Section2";
 import Section3 from "./section3/Section3";
 import Section4 from "./section4/Section4";
 
-import Footer from "./footer/Footer";
-
 function Home() {
-//     const [msg, setMsg] = useState('');
-//   const conn = () => {
-//     const webSocket = new WebSocket("ws://localhost:8080");
-//     webSocket.onopen = () => {
-//       console.log("웹소케섯버와 연결 성공");
-//     };
-//     webSocket.onmessage = (e) => {
-//       console.log(`받은 데이터는: ${e.data}`);
-//       setMsg(e.data);
-//       console.log(msg);
-//     };
-//   };
-//   useEffect(() => {
-//     conn();
-//   }, [msg]);
-
   return (
     <div>
       <Nav />
-      <Section1 />
+      <Section2 />
+      {/* <Section1 />
       <Section2 />
       <Section3 />
-      <Section4 />
-      <Footer />
+      <Section4 /> */}
+      {/* <Footer /> */}
       {/* <Temp /> */}
     </div>
   );

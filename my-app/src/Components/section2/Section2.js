@@ -1,65 +1,152 @@
-import React from "react";
-import a from './1.png';
-import b from './2.jpg';
-import c from './3.png';
-import d from './4.jpg';
-import e from './5.png';
-import f from './6.jpg';
-import g from './7.jpg';
-import h from './8.jpg';
-import i from './9.jpg';
-
+import icon from './icon.png';
 import {Link} from "react-router-dom";
-
+import React, { useEffect, useState } from "react";
+import ReactDOM from 'react-dom'
+import { FaHome, FaChild, FaHeartbeat, FaWind, FaTemperatureHigh } from 'react-icons/fa';
+import fall from './fall.png';
+import lean from './lean.png';
+import run from './run.png';
+import sit from './sit.png';
+import stand from './stand.png';
+import walk from './walk.png';
 
 const Section2 = () => {
+    // const [message, setMessage] = useState('');
+
+    // useEffect(() => {
+    //     const WebSocket = require('ws');
+    //     const socket = new window.WebSocket('ws://localhost:8080');
+
+    //     socket.onmessage = (event) => {
+    //       setMessage(event.data);
+    //       console.log(event.data);
+    //       let parse_data = JSON.parse(event.data)
+    //       let hr = parse_data.heartrate
+    //       let rp = parse_data.resp
+    //       let tp = parse_data.temp
+    //       console.log(parse_data)
+    //       if (parse_data.user === 'user1'){
+    //         user1_hr=hr;
+    //         user1_rp=rp;
+    //         user1_tp=tp;
+    //       }
+    //     };
+    //     return () => {
+    //       if(socket.readyState===1){
+    //         socket.close();
+    //       }
+    //     };
+    //   }, []);
+
     return (
         <div className="section">
+            {/* <p>{message}</p> */}
             <div className="experience">
-            <a name="target2"></a>
-                <p className="title">List of Members<span className="year">2021.xx.xx ~</span></p>
-                <div className="contents1">
-                <img className="photo" src={a} alt="agent"/>
-                    <Link to={"/Detail1"}>
-                        <a><div id="data" className="click">Agent1</div><br/><div id="pw">ID : <br/>NAME : </div><div id="view">View details</div><br/></a>
-                    </Link>
-                    <img className="photo" src={b} alt="agent"/>
-                    <Link to={"/Detail2"}>
-                        <a><div id="data" className="click">Agent2</div><br/><div id="pw">ID : <br/>NAME : </div><div id="view">View details</div><br/></a>
-                    </Link>
-                    <img className="photo" src={c} alt="agent"/>
-                    <Link to={"/Detail3"}>
-                        <a><div id="data" className="click">Agent3</div><br/><div id="pw">ID : <br/>NAME : </div><div id="view">View details</div><br/></a>
-                    </Link>
+                <div>
+                <div className="row1">
+                <div className="square">
+                <Link to={"/Detail1"}>
+                    <div id="data" className="click">#1</div>
+                    <img className="pic" src={fall} height="45px" alt="main"/>
+                    <div id="hr"><FaHeartbeat/> : </div>
+                    <div id="rp"><FaWind/> : </div>
+                    <div id="tp"><FaTemperatureHigh/> : </div>
+                </Link>              
+                </div>  
                 </div>
-                <div className="contents2">
-                    <img className="photo" src={d} alt="agent"/>
-                    <Link to={"/Detail4"}>
-                        <a><div id="data" className="click">Agent4</div><br/><div id="pw">ID : <br/>NAME : </div><div id="view">View details</div><br/></a>
-                    </Link>
-                    <img className="photo" src={e} alt="agent"/>
-                    <Link to={"/Detail5"}>
-                        <a><div id="data" className="click">Agent5</div><br/><div id="pw">ID : <br/>NAME : </div><div id="view">View details</div><br/></a>
-                    </Link>
-                    <img className="photo" src={f} alt="agent"/>
-                    <Link to={"/Detail6"}>
-                        <a><div id="data" className="click">Agent6</div><br/><div id="pw">ID : <br/>NAME : </div><div id="view">View details</div><br/></a>
-                    </Link>
+                <div className="row1">
+                <div className="square">
+                <Link to={"/Detail2"}>
+                    <div id="data" className="click">#2</div><br/>
+                    <img className="pic" src={lean} height="45px" alt="main"/>
+                    <div id="hr"><FaHeartbeat/> : </div>
+                    <div id="rp"><FaWind/> : </div>
+                    <div id="tp"><FaTemperatureHigh/> : </div>
+                </Link>              
+                </div>                 
                 </div>
-                <div className="contents3">
-                    <img className="photo" src={g} alt="agent"/>
-                    <Link to={"/Detail7"}>
-                        <a><div id="data" className="click">Agent7</div><br/><div id="pw">ID : <br/>NAME : </div><div id="view">View details</div><br/></a>
-                    </Link>
-                    <img className="photo" src={h} alt="agent"/>
-                    <Link to={"/Detail8"}>
-                        <a><div id="data" className="click">Agent8</div><br/><div id="pw">ID : <br/>NAME : </div><div id="view">View details</div><br/></a>
-                    </Link>
-                    <img className="photo" src={i} alt="agent"/>
-                    <Link to={"/Detail9"}>
-                        <a><div id="data" className="click">Agent9</div><br/><div id="pw">ID : <br/>NAME : </div><div id="view">View details</div><br/></a>
-                    </Link>
-                    <p/>
+                <div className="row1">
+                <div className="square">
+                <Link to={"/Detail3"}>
+                    <div id="data" className="click">#3</div><br/>
+                    <img className="pic" src={walk} height="45px" alt="main"/>
+                    <div id="hr"><FaHeartbeat/> : </div>
+                    <div id="rp"><FaWind/> : </div>
+                    <div id="tp"><FaTemperatureHigh/> : </div>
+                </Link>              
+                </div>                  
+                </div>
+                </div>
+                <div>
+                <div className="row2">
+                <div className="square">
+                <Link to={"/Detail4"}>
+                    <div id="data" className="click">#4</div><br/>
+                    <img className="pic" src={run} height="45px" alt="main"/>
+                    <div id="hr"><FaHeartbeat/> : </div>
+                    <div id="rp"><FaWind/> : </div>
+                    <div id="tp"><FaTemperatureHigh/> : </div>
+                </Link>              
+                </div>                 
+                </div>
+                <div className="row2">
+                <div className="square">
+                <Link to={"/Detail5"}>
+                    <div id="data" className="click">#5</div><br/>
+                    <img className="pic" src={sit} height="45px" alt="main"/>
+                    <div id="hr"><FaHeartbeat/> : </div>
+                    <div id="rp"><FaWind/> : </div>
+                    <div id="tp"><FaTemperatureHigh/> : </div>
+                </Link>              
+                </div>           
+                </div>
+                <div className="row2">
+                <div className="square">
+                <Link to={"/Detail6"}>
+                    <div id="data" className="click">#6</div><br/>
+                    <img className="pic" src={stand} height="45px" alt="main"/>
+                    <div id="hr"><FaHeartbeat/> : </div>
+                    <div id="rp"><FaWind/> : </div>
+                    <div id="tp"><FaTemperatureHigh/> : </div>
+                </Link>              
+                </div>               
+                </div>
+                </div>
+
+                <div>
+                <div className="row3">
+                <div className="square">
+                <Link to={"/Detail7"}>
+                    <div id="data" className="click">#7</div><br/>
+                    <img className="pic" src={stand} height="45px" alt="main"/>
+                    <div id="hr"><FaHeartbeat/> : </div>
+                    <div id="rp"><FaWind/> : </div>
+                    <div id="tp"><FaTemperatureHigh/> : </div>
+                </Link>              
+                </div>                 
+                </div>
+                <div className="row3">
+                <div className="square">
+                <Link to={"/Detail8"}>
+                    <div id="data" className="click">#8</div><br/>
+                    <img className="pic" src={stand} height="45px" alt="main"/>
+                    <div id="hr"><FaHeartbeat/> : </div>
+                    <div id="rp"><FaWind/> : </div>
+                    <div id="tp"><FaTemperatureHigh/> : </div>
+                </Link>              
+                </div>             
+                </div>
+                <div className="row3">
+                <div className="square">
+                <Link to={"/Detail9"}>
+                    <div id="data" className="click">#9</div><br/>
+                    <img className="pic" src={stand} height="45px" alt="main"/>
+                    <div id="hr"><FaHeartbeat/> : </div>
+                    <div id="rp"><FaWind/> : </div>
+                    <div id="tp"><FaTemperatureHigh/> : </div>
+                </Link>              
+                </div>               
+                </div>
                 </div>
             </div>
         </div>
